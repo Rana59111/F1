@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
-import { Police, ShieldAlert, Siren } from 'lucide-react';
+import { Siren, UserShield, Ambulance } from 'lucide-react';
 
 interface RespondModalProps {
   isOpen: boolean;
@@ -66,7 +66,7 @@ const RespondModal: React.FC<RespondModalProps> = ({
                   onCheckedChange={() => handleResponderToggle('security')}
                 />
                 <Label htmlFor="responder-security" className="flex items-center gap-2">
-                  <ShieldAlert className="h-4 w-4 text-security-primary" />
+                  <UserShield className="h-4 w-4 text-security-primary" />
                   Security Guards
                 </Label>
               </div>
@@ -78,7 +78,7 @@ const RespondModal: React.FC<RespondModalProps> = ({
                   onCheckedChange={() => handleResponderToggle('police')}
                 />
                 <Label htmlFor="responder-police" className="flex items-center gap-2">
-                  <Police className="h-4 w-4 text-security-primary" />
+                  <UserShield className="h-4 w-4 text-security-primary" />
                   Police
                 </Label>
               </div>
@@ -90,7 +90,7 @@ const RespondModal: React.FC<RespondModalProps> = ({
                   onCheckedChange={() => handleResponderToggle('ambulance')}
                 />
                 <Label htmlFor="responder-ambulance" className="flex items-center gap-2">
-                  <Siren className="h-4 w-4 text-security-primary" />
+                  <Ambulance className="h-4 w-4 text-security-primary" />
                   Ambulance
                 </Label>
               </div>

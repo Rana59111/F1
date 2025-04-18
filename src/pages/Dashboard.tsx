@@ -10,6 +10,7 @@ import AlertItem from '@/components/AlertItem';
 import RespondModal from '@/components/RespondModal';
 import { videoFeeds, alerts, generateRandomAlert } from '@/data/mockData';
 import { useToast } from '@/components/ui/use-toast';
+import { AlertSeverity } from '@/types/alerts';  // Create this type definition
 
 const Dashboard = () => {
   const [activeAlerts, setActiveAlerts] = useState(alerts);
@@ -31,7 +32,7 @@ const Dashboard = () => {
           variant: "destructive"
         });
       }
-    }, a5000); // Check every 5 seconds
+    }, 5000); // Check every 5 seconds (fixed the a5000 typo)
 
     return () => clearInterval(interval);
   }, [toast]);

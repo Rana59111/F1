@@ -10,10 +10,11 @@ import Navbar from '@/components/Navbar';
 import AlertItem from '@/components/AlertItem';
 import RespondModal from '@/components/RespondModal';
 import { alerts } from '@/data/mockData';
+import { AlertSeverity } from '@/types/alerts';  // Create this type definition
 
 const Alerts = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterSeverity, setFilterSeverity] = useState('all');
+  const [filterSeverity, setFilterSeverity] = useState<AlertSeverity | 'all'>('all');
   const [respondModalOpen, setRespondModalOpen] = useState(false);
   const [selectedAlert, setSelectedAlert] = useState<any>(null);
 
