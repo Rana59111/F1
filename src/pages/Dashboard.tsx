@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
-import { Shield, Activity, Bell, Camera, ExternalLink } from 'lucide-react';
+import { Shield, Activity, Bell, Camera, ExternalLink, HandHeart } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import VideoFeed from '@/components/VideoFeed';
 import AlertItem from '@/components/AlertItem';
 import RespondModal from '@/components/RespondModal';
 import { videoFeeds, alerts, generateRandomAlert } from '@/data/mockData';
 import { useToast } from '@/components/ui/use-toast';
-import { AlertSeverity } from '@/types/alerts';  // Create this type definition
+import { AlertSeverity } from '@/types/alerts';
 
 const Dashboard = () => {
   const [activeAlerts, setActiveAlerts] = useState(alerts);
@@ -17,21 +17,18 @@ const Dashboard = () => {
   const [selectedAlert, setSelectedAlert] = useState<any>(null);
   const { toast } = useToast();
 
-  // Simulate new alerts coming in periodically
   useEffect(() => {
     const interval = setInterval(() => {
-      if (Math.random() > 0.7) { // 30% chance of new alert
+      if (Math.random() > 0.7) {
         const newAlert = generateRandomAlert();
-        setActiveAlerts(prev => [newAlert, ...prev].slice(0, 10)); // Keep only 10 most recent
-        
-        // Show toast notification for new alert
+        setActiveAlerts(prev => [newAlert, ...prev].slice(0, 10));
         toast({
           title: "New Alert",
           description: newAlert.title,
           variant: "destructive"
         });
       }
-    }, 5000); // Check every 5 seconds (fixed the a5000 typo)
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [toast]);
@@ -49,15 +46,15 @@ const Dashboard = () => {
         <div className="flex flex-col gap-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold">Security Dashboard</h1>
-              <p className="text-security-foreground/70">Monitor and respond to security threats</p>
+              <h1 className="text-2xl font-bold">Safety Dashboard</h1>
+              <p className="text-security-foreground/70">Monitor and respond to safety alerts</p>
             </div>
             <div className="flex items-center gap-2">
               <Button variant="outline" className="gap-2">
                 <Camera size={16} />
                 <span>Add Camera</span>
               </Button>
-              <Button className="gap-2">
+              <Button className="gap-2 bg-[#D946EF] hover:bg-[#D946EF]/90">
                 <Bell size={16} />
                 <span>View Alerts</span>
               </Button>
@@ -68,8 +65,8 @@ const Dashboard = () => {
             <Card className="col-span-1">
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg flex items-center gap-2">
-                  <Shield className="h-5 w-5 text-security-primary" />
-                  <span>Security Status</span>
+                  <HandHeart className="h-5 w-5 text-[#D946EF]" />
+                  <span>Safety Status</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -103,10 +100,10 @@ const Dashboard = () => {
             <Card className="col-span-1 md:col-span-3">
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg flex items-center gap-2">
-                  <Activity className="h-5 w-5 text-security-primary" />
-                  <span>Threat Activity</span>
+                  <Activity className="h-5 w-5 text-[#D946EF]" />
+                  <span>Safety Alerts</span>
                 </CardTitle>
-                <CardDescription>Recent security alerts requiring attention</CardDescription>
+                <CardDescription>Recent alerts requiring immediate attention</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2 max-h-[280px] overflow-y-auto pr-1">
