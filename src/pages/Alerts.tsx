@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -10,7 +9,7 @@ import Navbar from '@/components/Navbar';
 import AlertItem from '@/components/AlertItem';
 import RespondModal from '@/components/RespondModal';
 import { alerts } from '@/data/mockData';
-import { AlertSeverity } from '@/types/alerts';  // Create this type definition
+import { AlertSeverity } from '@/types/alerts';
 
 const Alerts = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -71,7 +70,10 @@ const Alerts = () => {
                 
                 <div className="flex gap-2">
                   <div className="w-40">
-                    <Select value={filterSeverity} onValueChange={setFilterSeverity}>
+                    <Select 
+                      value={filterSeverity} 
+                      onValueChange={(value: AlertSeverity | 'all') => setFilterSeverity(value)}
+                    >
                       <SelectTrigger>
                         <Filter className="h-4 w-4 mr-2" />
                         <SelectValue placeholder="Filter" />
@@ -109,7 +111,7 @@ const Alerts = () => {
                         description={alert.description}
                         location={alert.location}
                         timestamp={alert.timestamp}
-                        severity={alert.severity}
+                        severity={alert.severity as AlertSeverity}
                         onRespond={() => handleRespondClick(alert)}
                       />
                     ))
@@ -138,7 +140,7 @@ const Alerts = () => {
                         description={alert.description}
                         location={alert.location}
                         timestamp={alert.timestamp}
-                        severity={alert.severity}
+                        severity={alert.severity as AlertSeverity}
                         onRespond={() => handleRespondClick(alert)}
                       />
                     ))

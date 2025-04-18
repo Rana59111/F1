@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -119,7 +118,7 @@ const Dashboard = () => {
                       description={alert.description}
                       location={alert.location}
                       timestamp={alert.timestamp}
-                      severity={alert.severity}
+                      severity={alert.severity as AlertSeverity}
                       onRespond={() => handleRespondClick(alert)}
                     />
                   ))}
