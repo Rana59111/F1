@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,33 @@ import RespondModal from '@/components/RespondModal';
 import { videoFeeds, alerts, generateRandomAlert } from '@/data/mockData';
 import { useToast } from '@/components/ui/use-toast';
 import { AlertSeverity } from '@/types/alerts';
+
+const CameraFeed = ({ camera }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (camera.id === 'cam-live' && videoRef.current) {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then((stream) => {
+          videoRef.current!.srcObject = stream;
+        })
+        .catch((err) => {
+          console.error("Error accessing webcam:", err);
+        });
+    }
+  }, [camera]);
+
+  return (
+    <div>
+      <h3>{camera.name}</h3>
+      {camera.id === 'cam-live' ? (
+        <video ref={videoRef} autoPlay muted width="100%" />
+      ) : (
+        <video src={camera.source} autoPlay loop muted width="100%" />
+      )}
+    </div>
+  );
+};
 
 const Dashboard = () => {
   const [activeAlerts, setActiveAlerts] = useState(alerts);
@@ -163,6 +190,9 @@ const Dashboard = () => {
                 ))}
               </div>
             </TabsContent>
+            {videoFeeds.map((cam) => (
+                <CameraFeed key={cam.id} camera={cam} />
+            ))}
           </Tabs>
         </div>
       </main>

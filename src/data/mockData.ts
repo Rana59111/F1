@@ -2,6 +2,12 @@
 // Sample video feeds for demonstration
 export const videoFeeds = [
   {
+    id: "cam-live",
+    name: "Live Laptop Camera",
+    source: null, // to be set dynamically
+    hasAlert: false
+  },
+  {
     id: "cam-001",
     name: "Main Entrance",
     source: "https://assets.mixkit.co/videos/preview/mixkit-people-walking-in-the-street-seen-in-time-lapse-4077-large.mp4",
